@@ -47,7 +47,6 @@
     image: mo0haned/net
     command: python save.py
 
-
 pipeline:
   name: My Pipeline
   description: A pipeline for training and saving a model
