@@ -47,6 +47,8 @@
 - step:
     name: save
     image: mo0haned/net
+    inputs:
+      - name: model
     command: python save.py
 
 - pipeline:
