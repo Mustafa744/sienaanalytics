@@ -19,7 +19,7 @@
     image: mo0haned/net
     command:
       - pip install --upgrade pip
-        pip install -r requirements.txt
+      - pip install -r requirements.txt
 
 - step:
     name: train
@@ -38,6 +38,8 @@
         default: 8
     command:
       - python train.py
+    outputs:
+      - name: model
 
 
 - step:
@@ -45,6 +47,16 @@
     image: mo0haned/net
     command: python save.py
 
-  # - name: evaluate
-  #   image: mo0haned/net
-  #   command: python evaluate.py
+
+pipeline:
+  name: My Pipeline
+  description: A pipeline for training and saving a model
+  steps:
+    - name: presetup
+    - name: train
+      inputs:
+        - name: tfrecords
+          default: gs://my-bucket/train-data
+      outputs:
+        - name: model
+          default: gs://my-bucket/trained-model
