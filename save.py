@@ -7,6 +7,8 @@ import time
 
 
 print(vh.inputs('model'))
+print(vh.inputs('model').path())
+
 unzip = zipfile.ZipFile(vh.inputs('model').path(), 'r')
 unzip.extractall(vh.outputs().path("exctracted_model"))
 print("extracted model to: " + vh.outputs().path("exctracted_model")) 
