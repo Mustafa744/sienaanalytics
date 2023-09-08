@@ -18,7 +18,6 @@ num_label_classes = vh.parameters('num_label_classes').value
 train_batch_size = vh.parameters('train_batch_size').value
 
 print(data_dir)
-os.system(f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=false --data_dir={data_dir}
-          --model_dir='/home/tensorflow/models/research/new/' --train_steps={train_steps} --skip_host_call=true --num_label_classes={num_label_classes} --train_batch_size={train_batch_size} """)
+os.system(f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=False --data_dir={data_dir} --model_dir=/home/tensorflow/models/research/new/ --train_steps=10 --skip_host_call=true --num_label_classes=5 --train_batch_size=8 """)
 shutil.make_archive(vh.outputs('trained').path('efficientnet'), 'zip', "/home/tensorflow/models/research/new/")
 os.system(f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet')}")
