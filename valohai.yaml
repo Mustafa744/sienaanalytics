@@ -14,7 +14,11 @@
 
 
 # Define the steps in your workflow
-
+- step:
+    name: setup
+    image: mo0haned/net
+    command:
+      - pip install -r requirements.txt
 - step:
     name: train
     image: mo0haned/net
@@ -32,9 +36,6 @@
         default: 8
       - name: use_tpu
         default: False
-    command:
-      - pip install valohai-utils
-      - pip install opencv-python
     command:
       - python train.py
 
