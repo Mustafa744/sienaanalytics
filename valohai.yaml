@@ -40,8 +40,6 @@
       - pip install --upgrade pip
       - pip install -r requirements.txt
       - python train.py
-    outputs:
-      - name: model
 
 
 - step:
@@ -50,6 +48,7 @@
     command: python save.py
     inputs:
       - name: model
+      - default: ""
 
 - pipeline:
     name: preprocess-and-train
@@ -62,4 +61,4 @@
       step: save
 
     edges:
-    - [train.output.trained, save.input.model]
+    - [train.output.trained/efficentnet.zip, save.input.model]
