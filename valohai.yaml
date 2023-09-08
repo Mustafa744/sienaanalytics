@@ -14,13 +14,13 @@
 
 
 # Define the steps in your workflow
-steps:
-
-  - name: train
+- step:
+    name: train
     image: mo0haned/net
     command: python train.py
 
-  - name: save
+- step:
+    name: save
     image: mo0haned/net
     command: python save.py
 
