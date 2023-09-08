@@ -31,7 +31,10 @@
         default: 8
       - name: use_tpu
         default: False
-    command: python train.py
+    command:
+      - pip install valohai-utils
+      - pip install opencv-python
+      - python train.py
 
 
 - step:
