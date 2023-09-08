@@ -14,12 +14,12 @@
 
 
 # Define the steps in your workflow
-- step:
-    name: presetup
-    image: mo0haned/net
-    command:
-      - pip install --upgrade pip
-      - pip install -r requirements.txt
+# - step:
+#     name: presetup
+#     image: mo0haned/net
+#     command:
+#       - pip install --upgrade pip
+#       - pip install -r requirements.txt
 
 - step:
     name: train
@@ -37,6 +37,8 @@
       - name: train_batch_size
         default: 8
     command:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
       - python train.py
     outputs:
       - name: model
