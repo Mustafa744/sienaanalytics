@@ -61,4 +61,4 @@
       type: execution
       step: save
     edges:
-    - [train.output.trained, save.input.model]
+    - [train.output.trained.efficientnet, save.input.model]
