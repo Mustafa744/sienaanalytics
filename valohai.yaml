@@ -17,8 +17,8 @@
 - step:
     name: setup
     image: mo0haned/net
-    command:
-      - pip install -r requirements.txt
+    command: pip install -r requirements.txt
+    
 - step:
     name: train
     image: mo0haned/net
