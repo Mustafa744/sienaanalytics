@@ -17,7 +17,11 @@
 - step:
     name: train
     image: mo0haned/net
+    inputs:
+      - name: tfrecords
+        default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
     command: python train.py
+
 
 - step:
     name: save
