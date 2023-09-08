@@ -1,4 +1,4 @@
-steps:
-  - name: hello
+- step:
+    name: hello
     image: tensorflow/tensorflow:2.6.0
     command: python hello.py
