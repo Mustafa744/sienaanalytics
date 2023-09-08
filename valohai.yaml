@@ -15,10 +15,10 @@
 
 # Define the steps in your workflow
 - step:
-    name: setup
+    name: presetup
     image: mo0haned/net
     command: pip install -r requirements.txt
-    
+
 - step:
     name: train
     image: mo0haned/net
