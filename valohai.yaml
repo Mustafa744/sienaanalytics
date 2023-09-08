@@ -34,8 +34,6 @@
         default: 5
       - name: train_batch_size
         default: 8
-      - name: use_tpu
-        default: False
     command:
       - python train.py
 
