@@ -45,9 +45,12 @@
 - step:
     name: save
     image: mo0haned/net
-    command: python save.py
     inputs:
       - name: model
+    command:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - python save.py
 
 - pipeline:
     name: preprocess-and-train
