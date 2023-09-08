@@ -60,7 +60,6 @@
     - name: save
       type: execution
       step: save
-      inputs:
-        - name: model
+
     edges:
     - [train.output.trained, save.input.model]
