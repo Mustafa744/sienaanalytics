@@ -20,9 +20,9 @@ steps:
     image: mo0haned/net
     command: python train.py
 
-  # - name: save
-  #   image: mo0haned/net
-  #   command: python save.py
+  - name: save
+    image: mo0haned/net
+    command: python save.py
 
   # - name: evaluate
   #   image: mo0haned/net
