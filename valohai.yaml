@@ -20,6 +20,17 @@
     inputs:
       - name: tfrecords
         default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
+    parameters:
+      - name: train_steps
+        default: 5
+      - name: model_dir
+        default: '/home/tensorflow/models/research/new/'
+      - name: num_label_classes
+        default: 5
+      - name: train_batch_size
+        default: 8
+      - name: use_tpu
+        default: False
     command: python train.py
 
 

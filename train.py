@@ -11,11 +11,11 @@ data_dir = data_dir[:-1]
 data_dir = '/'.join(data_dir)
 data_dir = f'{data_dir}/'
 
-use_tpu = vh.parameters('use_tpu').value or False
-train_steps = vh.parameters('train_steps').value or 1
-model_dir = vh.parameters('model_dir').value or '/home/tensorflow/models/research/new/'
-num_label_classes = vh.parameters('num_label_classes').value or 5
-train_batch_size = vh.parameters('train_batch_size').value or 8
+use_tpu = vh.parameters('use_tpu').value
+train_steps = vh.parameters('train_steps').value
+model_dir = vh.parameters('model_dir').value
+num_label_classes = vh.parameters('num_label_classes').value
+train_batch_size = vh.parameters('train_batch_size').value
 
 print(data_dir)
 os.system(f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu={use_tpu} --data_dir={data_dir}
