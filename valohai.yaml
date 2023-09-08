@@ -48,7 +48,6 @@
     command: python save.py
     inputs:
       - name: model
-      - default: ""
 
 - pipeline:
     name: preprocess-and-train
