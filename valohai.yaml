@@ -1,13 +1,29 @@
 ---
 
-- step:
-    name: Training model
+# - step:
+#     name: Training model
+#     image: mo0haned/net
+#     environment: valohai-gcp-us-central1-12-64000-1xt4
+#     command:
+#       - pip install valohai-utils
+#       - pip install opencv-python
+#       - python main.py
+#     inputs:
+#       - name: tfrecords
+#         default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
+
+
+# Define the steps in your workflow
+steps:
+
+  - name: train
     image: mo0haned/net
-    environment: valohai-gcp-us-central1-12-64000-1xt4
-    command:
-      - pip install valohai-utils
-      - pip install opencv-python
-      - python main.py
-    inputs:
-      - name: tfrecords
-        default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
+    command: python train.py
+
+  # - name: save
+  #   image: mo0haned/net
+  #   command: python save.py
+
+  # - name: evaluate
+  #   image: mo0haned/net
+  #   command: python evaluate.py
