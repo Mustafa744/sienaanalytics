@@ -60,4 +60,4 @@
       step: save
 
     edges:
-    - [train.output.efficentnet.zip, save.input.model]
+    - [train.output.efficientnet.zip, save.input.model]
