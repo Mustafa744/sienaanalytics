@@ -47,15 +47,14 @@
     image: mo0haned/net
     command: python save.py
 
-pipeline:
-  name: My Pipeline
-  description: A pipeline for training and saving a model
-  steps:
-    - name: presetup
+- pipeline:
+    name: preprocess-and-train
+    nodes:
     - name: train
-      inputs:
-        - name: tfrecords
-          default: gs://my-bucket/train-data
-      outputs:
-        - name: model
-          default: gs://my-bucket/trained-model
+      type: execution
+      step: train
+    - name: save
+      type: execution
+      step: save
+    edges:
+    - [train.output.trained, save.input.model]
