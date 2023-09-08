@@ -1,0 +1,8 @@
+# write a step to run hello.py valohai yaml
+steps:
+  - name: hello
+    image: python:3.7
+    command: python hello.py
+
+
+# Path: sienaanalytics/valohai.yaml
