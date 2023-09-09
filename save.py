@@ -11,10 +11,10 @@ tf.compat.v1.disable_eager_execution()
 meta_file = "/home/tensorflow/models/research/new/model.ckpt-0.meta"
 checkpoint_dir = "/home/tensorflow/models/research/new/"
 
-saver = tf.compat.v1.train.import_meta_graph(meta_file)
-
 print("using os" + os.listdir("/home/tensorflow/models/research/new/"))
 print("using valohai" + vh.inputs("trained_model").path("model.ckpt-0.meta"))
+saver = tf.compat.v1.train.import_meta_graph(meta_file)
+
 # checkpoint_dir = "/home/tensorflow/models/research/trained"
 checkpoint = tf.compat.v1.train.latest_checkpoint(checkpoint_dir)
 
