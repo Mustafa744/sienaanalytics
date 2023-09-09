@@ -12,8 +12,8 @@ inputs = {
 vh.prepare(step="save step", image="mo0haned/net", default_inputs=inputs)
 
 
-print(vh.inputs("model"))
-print(vh.inputs("model").path())
+print(i for i in vh.inputs("model"))
+print(i for i in vh.inputs("model").path())
 try:
     unzip = zipfile.ZipFile(vh.inputs("model").path(), "r")
     unzip.extractall(vh.outputs().path("exctracted_model"))
