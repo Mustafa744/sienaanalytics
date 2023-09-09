@@ -34,7 +34,7 @@ with tf.compat.v1.Session() as sess:
     )
 
     # Replace 'frozen_graph.pb' with the desired output pb file path
-    pb_file_path = f"""{vh.outputs("saved").path("frozen_graph.pb")}"""
+    pb_file_path = f"""{vh.outputs().path("frozen_graph.pb")}"""
     with tf.io.gfile.GFile(pb_file_path, "wb") as f:
         f.write(frozen_graph_def.SerializeToString())
 

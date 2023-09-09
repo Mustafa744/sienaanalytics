@@ -1,24 +1,60 @@
-import os,glob
-import valohai as vh
-import tarfile
-import shutil
-import zipfile
-import time
-from threading import Thread
-data_dir = vh.inputs('tfrecords').path()
-data_dir = data_dir.split('/')
-data_dir = data_dir[:-1]
-data_dir = '/'.join(data_dir)
-data_dir = f'{data_dir}/'
+import os
+from tensorflow.python.tools import freeze_graph
 
-use_tpu = vh.parameters('use_tpu').value or False
-train_steps = vh.parameters('train_steps').value or 1
-model_dir = vh.parameters('model_dir').value or '/home/tensorflow/models/research/new/'
-num_label_classes = vh.parameters('num_label_classes').value or 5
-train_batch_size = vh.parameters('train_batch_size').value or 8
 
-print(data_dir)
-os.system(f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu={use_tpu} --data_dir={data_dir}
-          --model_dir={model_dir} --train_steps={train_steps} --skip_host_call=true --num_label_classes={num_label_classes} --train_batch_size={train_batch_size} """)
-shutil.make_archive(vh.outputs('trained').path('efficientnet'), 'zip', "/home/tensorflow/models/research/new/")
-os.system(f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet')}")
+def save(self, directory, filename):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    filepath = os.path.join(directory, filename + ".ckpt")
+    self.saver.save(self.sess, filepath)
+    return filepath
+
+
+def save_as_pb(self, directory, filename):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    # Save check point for graph frozen later
+    ckpt_filepath = self.save(directory=directory, filename=filename)
+    pbtxt_filename = filename + ".pbtxt"
+    pbtxt_filepath = os.path.join(directory, pbtxt_filename)
+    pb_filepath = os.path.join(directory, filename + ".pb")
+    # This will only save the graph but the variables will not be saved.
+    # You have to freeze your model first.
+    tf.train.write_graph(
+        graph_or_graph_def=self.sess.graph_def,
+        logdir=directory,
+        name=pbtxt_filename,
+        as_text=True,
+    )
+
+    # Freeze graph
+    # Method 1
+    freeze_graph.freeze_graph(
+        input_graph=pbtxt_filepath,
+        input_saver="",
+        input_binary=False,
+        input_checkpoint=ckpt_filepath,
+        output_node_names="cnn/output",
+        restore_op_name="save/restore_all",
+        filename_tensor_name="save/Const:0",
+        output_graph=pb_filepath,
+        clear_devices=True,
+        initializer_nodes="",
+    )
+
+    # Method 2
+    """
+    graph = tf.get_default_graph()
+    input_graph_def = graph.as_graph_def()
+    output_node_names = ['cnn/output']
+
+    output_graph_def = graph_util.convert_variables_to_constants(self.sess, input_graph_def, output_node_names)
+    # For some models, we would like to remove training nodes
+    # output_graph_def = graph_util.remove_training_nodes(output_graph_def, protected_nodes=None)
+
+    with tf.gfile.GFile(pb_filepath, 'wb') as f:
+        f.write(output_graph_def.SerializeToString())
+    """
+
+    return pb_filepath
