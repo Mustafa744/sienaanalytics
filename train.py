@@ -25,5 +25,5 @@ os.system(
 shutil.make_archive(
     vh.outputs().path("efficientnet"), "zip", "/home/tensorflow/models/research/new/"
 )
-vh.logger.info("[info]" + vh.outputs().path("efficientnet"))
+print("[info]" + vh.outputs().path("efficientnet"))
 # os.system(f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet')}")
