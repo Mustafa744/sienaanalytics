@@ -11,9 +11,15 @@ inputs = {
 
 vh.prepare(step="save step", image="mo0haned/net", default_inputs=inputs)
 
+try:
+    print(vh.inputs("model").paths())
+except Exception as e:
+    print("error", e)
+try:
+    print(i for i in vh.inputs("model").paths())
+except Exception as e:
+    print("error", e)
 
-print(i for i in vh.inputs("model"))
-print(i for i in vh.inputs("model").path())
 try:
     unzip = zipfile.ZipFile(vh.inputs("model").path(), "r")
     unzip.extractall(vh.outputs().path("exctracted_model"))
