@@ -26,6 +26,6 @@ os.system(
 path = vh.outputs("trained").path("efficientnet")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
 print("[info]" + path)
-os.system(
-    f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"
-)
+# os.system(
+#     f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"
+# )
