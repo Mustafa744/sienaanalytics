@@ -5,6 +5,12 @@ import shutil
 import zipfile
 import time
 
+inputs = {
+    "model": "",
+}
+
+vh.prepare(step="save step", image="mo0haned/net", default_inputs=inputs)
+
 
 print(vh.inputs("model"))
 print(vh.inputs("model").path())

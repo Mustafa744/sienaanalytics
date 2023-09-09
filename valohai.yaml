@@ -1,26 +1,3 @@
----
-
-# - step:
-#     name: Training model
-#     image: mo0haned/net
-#     environment: valohai-gcp-us-central1-12-64000-1xt4
-    # command:
-    #   - pip install valohai-utils
-    #   - pip install opencv-python
-    #   - python main.py
-#     inputs:
-#       - name: tfrecords
-#         default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
-
-
-# Define the steps in your workflow
-# - step:
-#     name: presetup
-#     image: mo0haned/net
-#     command:
-#       - pip install --upgrade pip
-#       - pip install -r requirements.txt
-
 - step:
     name: train step
     image: mo0haned/net
