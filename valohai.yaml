@@ -35,6 +35,16 @@
       - pip install -r requirements.txt
       - python save.py
 
+- step:
+    name: save step
+    image: mo0haned/net
+    inputs:
+      - name: saved_model
+    command:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - python eval.py
+
 - pipeline:
     name: preprocess-and-train
     nodes:
@@ -44,6 +54,10 @@
     - name: save
       type: execution
       step: save step
+    # - name: evaluate
+    #   type: execution
+    #   step: eval step
 
     edges:
     - [train.output.trained/*, save.input.model]
+    # - [save.output.saved_model/*, evaluate.input.saved_model]
