@@ -17,6 +17,9 @@ except Exception as e:
     print("error", e)
 try:
     print(i for i in vh.inputs("model").paths())
+    for image_path in vh.inputs("model").paths():
+        print(image_path)
+    
 except Exception as e:
     print("error", e)
 
