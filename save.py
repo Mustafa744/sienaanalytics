@@ -19,14 +19,14 @@ try:
     print(i for i in vh.inputs("model").paths())
     for image_path in vh.inputs("model").paths():
         print(image_path)
-    
+
 except Exception as e:
     print("error", e)
 
-try:
-    unzip = zipfile.ZipFile(vh.inputs("model").path(), "r")
-    unzip.extractall(vh.outputs().path("exctracted_model"))
-    print("extracted model to: " + vh.outputs().path("exctracted_model"))
-except Exception as e:
-    print("error extracting model", e)
-    print(os.listdir(vh.inputs("model").path()))
+# try:
+#     unzip = zipfile.ZipFile(vh.inputs("model").path(), "r")
+#     unzip.extractall(vh.outputs().path("exctracted_model"))
+#     print("extracted model to: " + vh.outputs().path("exctracted_model"))
+# except Exception as e:
+#     print("error extracting model", e)
+#     print(os.listdir(vh.inputs("model").path()))
