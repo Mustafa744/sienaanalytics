@@ -22,11 +22,16 @@
 #       - pip install -r requirements.txt
 
 - step:
-    name: train
+    name: train step
     image: mo0haned/net
     inputs:
       - name: tfrecords
-        default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
+        # default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
+        default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/dataset_info.json
+                 gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/features.json
+                 gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/test-0.tfrecord-00000-of-00001
+                 gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/train-0.tfrecord-00000-of-00001
+                 gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/validation-0.tfrecord-00000-of-00001
     parameters:
       - name: train_steps
         default: 5
@@ -43,7 +48,7 @@
 
 
 - step:
-    name: save
+    name: save step
     image: mo0haned/net
     inputs:
       - name: model
@@ -57,10 +62,10 @@
     nodes:
     - name: train
       type: execution
-      step: train
+      step: train step
     - name: save
       type: execution
-      step: save
+      step: save step
 
     edges:
     - [train.output.efficientnet.zip, save.input.model]
