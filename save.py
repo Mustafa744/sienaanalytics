@@ -16,6 +16,7 @@ saver = tf.compat.v1.train.import_meta_graph(meta_file)
 # checkpoint_dir = "/home/tensorflow/models/research/trained"
 checkpoint = tf.compat.v1.train.latest_checkpoint(checkpoint_dir)
 
+print(os.listdir("/home/tensorflow/models/research/new/"))
 # Create a TensorFlow 1 session
 with tf.compat.v1.Session() as sess:
     # Restore the checkpoint variables
