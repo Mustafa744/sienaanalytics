@@ -39,7 +39,10 @@ import tensorflow as tf
 #         f.write(frozen_graph_def.SerializeToString())
 
 
-input_path = vh.inputs("trained_model").path()
+os.mkdir("/home/tensorflow/models/research/new/trained_model")
+for path in vh.inputs("trained_model").paths():
+    os.system(f"cp {path} /home/tensorflow/models/research/new/trained_model")
+checkpoint_dir = "/home/tensorflow/models/research/new/trained_model"
 with vh.metadata.logger() as logger:
-    logger.log("input path", input_path)
-    logger.log("input directory content: ", os.listdir(input_path))
+    logger.log("checkpoint path", checkpoint_dir)
+    logger.log("checkpoint directory content: ", os.listdir(checkpoint_dir))
