@@ -23,7 +23,7 @@ os.system(
     f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=False --data_dir={data_dir} --model_dir=/home/tensorflow/models/research/new/ --train_steps=1 --skip_host_call=true --num_label_classes=5 --train_batch_size=8 """
 )
 
-path = vh.outputs().path("trained.zip")
+path = vh.outputs().path("trained")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
 with vh.metadata.logger() as logger:
     logger.log("model", path)
