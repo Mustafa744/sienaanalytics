@@ -9,7 +9,9 @@ import tensorflow as tf
 
 tf.compat.v1.disable_eager_execution()
 meta_file = vh.inputs("trained_model").path("model.ckpt-0.meta")
-checkpoint_dir = vh.inputs("trained_model").path("model.ckpt-0.meta").split("/")[-2]
+checkpoint_dir = (
+    f"""/tmp/{vh.inputs("trained_model").path("model.ckpt-0.meta").split("/")[-2]}"""
+)
 print("************************************")
 print(meta_file)
 print(checkpoint_dir)
