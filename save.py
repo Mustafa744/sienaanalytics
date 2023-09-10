@@ -13,6 +13,7 @@ tf.compat.v1.disable_eager_execution()
 #     f"""/tmp/{vh.inputs("trained_model").path("model.ckpt-0.meta").split("/")[-2]}"""
 # )
 
+x = vh.inputs("trained_model").path("model.ckpt-0.meta")
 checkpoint_dir = vh.outputs("tfrecord").path("efficientnet_folder")
 meta_file = vh.outputs("tfrecord").path("efficientnet_folder/model.ckpt-0.meta")
 print("************************************")
