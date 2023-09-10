@@ -19,6 +19,8 @@ meta_file = vh.outputs("tfrecord").path("efficientnet_folder/model.ckpt-0.meta")
 print("************************************")
 print(meta_file)
 print(checkpoint_dir)
+print("************************************")
+print(os.listdir(checkpoint_dir))
 
 saver = tf.compat.v1.train.import_meta_graph(meta_file)
 
