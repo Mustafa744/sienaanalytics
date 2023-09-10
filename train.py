@@ -25,7 +25,7 @@ os.system(
 
 path = vh.outputs().path("trained.zip")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
-with valohai.metadata.logger() as logger:
+with vh.metadata.logger() as logger:
     logger.log("model", path)
 # os.system(
 #     f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"

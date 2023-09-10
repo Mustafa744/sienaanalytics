@@ -39,7 +39,7 @@ import tensorflow as tf
 #         f.write(frozen_graph_def.SerializeToString())
 
 
-input_path = valohai.inputs("trained_model").path()
-with valoha.metadata.logger() as logger:
+input_path = vh.inputs("trained_model").path()
+with vh.metadata.logger() as logger:
     logger.log("input path", input_path)
     logger.log("input directory content: ", os.listdir(input_path))
