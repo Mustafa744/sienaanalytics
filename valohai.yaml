@@ -1,6 +1,7 @@
 - step:
     name: train step
     image: mo0haned/net
+    environment: valohai-gcp-us-central1-12-64000-1xt4
     inputs:
       - name: tfrecords
         # default: gs://valohai_object_detection/data/01FZC/01FZCRSPP49MRZ3XTZE8Q8BN3V/output-315/trained/efficientnet/**
@@ -35,15 +36,15 @@
       - pip install -r requirements.txt
       - python save.py
 
-# - step:
-#     name: eval step
-#     image: mo0haned/net
-#     inputs:
-#       - name: saved_model
-#     command:
-#       - pip install --upgrade pip
-#       - pip install -r requirements.txt
-#       - python eval.py
+- step:
+    name: eval step
+    image: mo0haned/net
+    inputs:
+      - name: frozen_model
+    command:
+      - pip install --upgrade pip
+      - pip install -r requirements.txt
+      - python eval.py
 
 - pipeline:
     name: preprocess-and-train
@@ -54,10 +55,10 @@
     - name: save
       type: execution
       step: save step
-    # - name: evaluate
-    #   type: execution
-    #   step: eval step
+    - name: evaluate
+      type: execution
+      step: eval step
 
     edges:
     - [train.output.trained.zip, save.input.trained_model]
-    # - [train.output.trained/model.ckpt-0.meta, save.input.trained_model]
+    - [save.output.frozen_graph.pb, evaluate.input.frozen_model]

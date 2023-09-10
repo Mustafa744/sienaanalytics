@@ -20,13 +20,15 @@ train_batch_size = vh.parameters("train_batch_size").value
 
 print(data_dir)
 os.system(
-    f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=False --data_dir={data_dir} --model_dir=/home/tensorflow/models/research/new/ --train_steps=1 --skip_host_call=true --num_label_classes=5 --train_batch_size=8 """
+    f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=False --data_dir={data_dir} --model_dir=/home/tensorflow/models/research/new/ --train_steps=10 --skip_host_call=true --num_label_classes=5 --train_batch_size=8 """
 )
+
 
 path = vh.outputs().path("trained")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
 with vh.metadata.logger() as logger:
     logger.log("model", path)
-# os.system(
-#     f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"
-# )
+
+os.system(
+    f"cp /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet')}"
+)
