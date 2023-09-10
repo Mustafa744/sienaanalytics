@@ -23,9 +23,10 @@ os.system(
     f"""python /home/tensorflow/models/research/models/official/efficientnet/main.py --use_tpu=False --data_dir={data_dir} --model_dir=/home/tensorflow/models/research/new/ --train_steps=1 --skip_host_call=true --num_label_classes=5 --train_batch_size=8 """
 )
 
-path = vh.outputs("trained").path("efficientnet")
+path = vh.outputs().path("trained.zip")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
-print("[info]" + path)
-os.system(
-    f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"
-)
+with valohai.metadata.logger() as logger:
+    logger.log("model", path)
+# os.system(
+#     f"mv /home/tensorflow/models/research/new/ {vh.outputs('tfrecord').path('efficientnet_folder')}"
+# )
