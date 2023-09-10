@@ -9,7 +9,7 @@ import tensorflow as tf
 
 tf.compat.v1.disable_eager_execution()
 meta_file = vh.inputs("trained_model").path("model.ckpt-0.meta")
-checkpoint_dir = vh.inputs("trained_model").path("efficientnet")
+checkpoint_dir = vh.inputs("trained_model").path("model.ckpt-0.meta").split("/")[-2]
 
 saver = tf.compat.v1.train.import_meta_graph(meta_file)
 
