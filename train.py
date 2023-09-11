@@ -28,7 +28,7 @@ path = vh.outputs().path("trained")
 shutil.make_archive(path, "zip", "/home/tensorflow/models/research/new/")
 with vh.metadata.logger() as logger:
     logger.log("model", path)
-    logger.log("listing temp directory", os.listdir("/temp"))
+    logger.log("listing temp directory", os.listdir("/tmp"))
     if "labels_map.pbtxt" in os.listdir("/tmp"):
         logger.log("found labels_map.pbtxt")
         os.mv("/tmp/labels_map.pbtxt", vh.outputs().path("labels_map.pbtxt"))
